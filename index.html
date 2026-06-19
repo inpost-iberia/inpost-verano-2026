@@ -427,9 +427,7 @@ function showForm(idx){
     btnSub.disabled=true;btnSub.textContent=t('sending');
     var cat=state==='unsure'?t('cat_unsure'):openType==='same'?t('cat_open_same'):t('cat_open_red');
     var sub={state:state,openType:openType,periods:[],schedule:schedule,category:cat};
-    if(!IS_LOCAL){
-      try{
-        saveSub(userEmail,pid,sub);submissions[pid]=sub;
+    saveSub(userEmail,pid,sub);submissions[pid]=sub;
     if(isLast)showConfirmation();else showForm(idx+1);
   });
 }
