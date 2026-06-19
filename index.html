@@ -429,11 +429,7 @@ function showForm(idx){
     var sub={state:state,openType:openType,periods:[],schedule:schedule,category:cat};
     if(!IS_LOCAL){
       try{
-        var params=new URLSearchParams({point_id:pid,point_name:pt[1],email:userEmail,point_type:'PUDO',category:cat,state:state,open_type:openType||'',periods:'[]',schedule:JSON.stringify(schedule||{})});
-        await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',body:params});
-      }catch(ex){errEl.textContent=t('err_send');errEl.style.display='block';btnSub.disabled=false;btnSub.textContent=t(isLast?'finish':'next');return;}
-    }
-    saveSub(userEmail,pid,sub);submissions[pid]=sub;
+        saveSub(userEmail,pid,sub);submissions[pid]=sub;
     if(isLast)showConfirmation();else showForm(idx+1);
   });
 }
@@ -554,7 +550,7 @@ function showConfirmation(){
               periods:JSON.stringify(sub.state==='close'&&sub.periods?sub.periods:[]),
               schedule:JSON.stringify(sub.schedule||{})
             });
-            await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',body:params});
+            await fetch(SCRIPT_URL+'?'+params.toString(),{method:'GET',mode:'no-cors'});
         }
       }catch(ex){
         errEl.textContent=t('err_send');errEl.style.display='block';
