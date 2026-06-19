@@ -564,6 +564,10 @@ function showConfirmation(){
         return;
       }
     }
+    // Clear localStorage for all submitted points to prevent re-submission
+    selectedPoints.forEach(function(pid){
+      try{localStorage.removeItem('v26_'+userEmail+'_'+pid);}catch(e){}
+    });
     showSummary();
   });
 }
