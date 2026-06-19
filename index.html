@@ -548,7 +548,7 @@ function showConfirmation(){
               periods:JSON.stringify(sub.state==='close'&&sub.periods?sub.periods:[]),
               schedule:JSON.stringify(sub.schedule||{})
             });
-            await fetch(SCRIPT_URL+'?'+params.toString(),{method:'GET',mode:'no-cors'});
+            await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',body:params});
         }
       }catch(ex){
         errEl.textContent=t('err_send');errEl.style.display='block';
